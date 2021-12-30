@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -43,18 +45,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CustomText() {
     Column(Modifier.fillMaxSize()) {
-        Text(
-            text = stringResource(id = R.string.app_name),
-            modifier = Modifier
-                .background(MaterialTheme.colors.primary)
-                .padding(16.dp)
-                .width(250.dp),
-            fontSize = MaterialTheme.typography.h6.fontSize,
-            fontWeight = FontWeight.Bold,
-            fontStyle = FontStyle.Normal,
-            color = Color.White,
-            textAlign = TextAlign.Center
-        )
+       SelectionContainer() {
+           Column {
+               Text(
+                   text = stringResource(id = R.string.app_name),
+                   modifier = Modifier
+                       .background(MaterialTheme.colors.primary)
+                       .padding(16.dp)
+                       .width(250.dp),
+                   fontSize = MaterialTheme.typography.h6.fontSize,
+                   fontWeight = FontWeight.Bold,
+                   fontStyle = FontStyle.Normal,
+                   color = Color.White,
+                   textAlign = TextAlign.Center
+               )
+               DisableSelection {
+                   Text(text = "Yvan Ndeme")
+               }
+               Text(text = "Android Dev")
+           }
+       }
     }
 }
 
@@ -85,7 +95,7 @@ fun annotetedString() {
 @Composable
 fun DefaultPreview() {
     Learn_jetpack_composeTheme {
-//        CustomText()
-        annotetedString()
+        CustomText()
+//        annotetedString()
     }
 }

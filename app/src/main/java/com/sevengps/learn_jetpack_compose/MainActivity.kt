@@ -11,6 +11,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,7 +32,7 @@ class MainActivity : ComponentActivity() {
             Learn_jetpack_composeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Screen()
+                    CustomText()
                 }
             }
         }
@@ -32,26 +41,43 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Screen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter
-
-    ) {
-        Box(
+fun CustomText() {
+    Column(Modifier.fillMaxSize()) {
+        Text(
+            text = stringResource(id = R.string.app_name),
             modifier = Modifier
-                .background(color = androidx.compose.ui.graphics.Color.Blue),
-            contentAlignment = Alignment.Center
-        ) {
-            Box(
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(50.dp)
-                    .background(androidx.compose.ui.graphics.Color.Green)
-            )
-            Text(text = "I Love Android ", fontSize = 40.sp)
-        }
+                .background(MaterialTheme.colors.primary)
+                .padding(16.dp)
+                .width(250.dp),
+            fontSize = MaterialTheme.typography.h6.fontSize,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal,
+            color = Color.White,
+            textAlign = TextAlign.Center
+        )
     }
+}
+
+//Facont de creer des textes comme Richtext en flutter
+@Composable
+fun annotetedString() {
+    Column(Modifier.fillMaxSize()) {
+        Text(
+            buildAnnotatedString {
+                withStyle(style = ParagraphStyle(textAlign = TextAlign.Center)) {
+                    withStyle(style = SpanStyle(color = Color.Green, fontSize = 30.sp)) {
+                        append("A")
+                    }
+                    append("B")
+                    append("C")
+                    append("D")
+                }
+
+            },
+            modifier = Modifier.width(200.dp)
+        )
+    }
+
 }
 
 
@@ -59,7 +85,7 @@ fun Screen() {
 @Composable
 fun DefaultPreview() {
     Learn_jetpack_composeTheme {
-        Screen()
-
+//        CustomText()
+        annotetedString()
     }
 }
